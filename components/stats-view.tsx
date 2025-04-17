@@ -66,9 +66,9 @@ export function StatsView() {
               <CardTitle>Weekly Progress</CardTitle>
               <CardDescription>Your task completion over the past week</CardDescription>
             </CardHeader>
-            <CardContent className="h-[300px] flex items-center justify-center">
-              <div className="text-center text-muted-foreground flex flex-col items-center">
-                <LineChart className="h-16 w-16 mb-2" />
+            <CardContent className="flex h-[300px] items-center justify-center">
+              <div className="flex flex-col items-center text-center text-muted-foreground">
+                <LineChart className="mb-2 h-16 w-16" />
                 <p>Weekly progress chart would appear here</p>
               </div>
             </CardContent>
@@ -109,7 +109,7 @@ export function StatsView() {
                   <CardHeader className="pb-2">
                     <CardTitle className="text-sm">Task Completion Time</CardTitle>
                   </CardHeader>
-                  <CardContent className="h-[200px] flex items-center justify-center">
+                  <CardContent className="flex h-[200px] items-center justify-center">
                     <div className="text-center text-muted-foreground">
                       <p>Task completion time chart would appear here</p>
                     </div>
@@ -130,7 +130,7 @@ export function StatsView() {
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center">
-                      <div className="w-3 h-3 rounded-full bg-red-500 mr-2" />
+                      <div className="mr-2 h-3 w-3 rounded-full bg-red-500" />
                       <span>High</span>
                     </div>
                     <span className="font-medium">8</span>
@@ -138,7 +138,7 @@ export function StatsView() {
 
                   <div className="flex items-center justify-between">
                     <div className="flex items-center">
-                      <div className="w-3 h-3 rounded-full bg-orange-500 mr-2" />
+                      <div className="mr-2 h-3 w-3 rounded-full bg-orange-500" />
                       <span>Medium</span>
                     </div>
                     <span className="font-medium">10</span>
@@ -146,7 +146,7 @@ export function StatsView() {
 
                   <div className="flex items-center justify-between">
                     <div className="flex items-center">
-                      <div className="w-3 h-3 rounded-full bg-green-500 mr-2" />
+                      <div className="mr-2 h-3 w-3 rounded-full bg-green-500" />
                       <span>Low</span>
                     </div>
                     <span className="font-medium">6</span>
@@ -163,7 +163,7 @@ export function StatsView() {
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center">
-                      <Tag className="h-4 w-4 mr-2 text-muted-foreground" />
+                      <Tag className="mr-2 h-4 w-4 text-muted-foreground" />
                       <span>Work</span>
                     </div>
                     <span className="font-medium">12</span>
@@ -171,7 +171,7 @@ export function StatsView() {
 
                   <div className="flex items-center justify-between">
                     <div className="flex items-center">
-                      <Tag className="h-4 w-4 mr-2 text-muted-foreground" />
+                      <Tag className="mr-2 h-4 w-4 text-muted-foreground" />
                       <span>Personal</span>
                     </div>
                     <span className="font-medium">8</span>
@@ -179,7 +179,7 @@ export function StatsView() {
 
                   <div className="flex items-center justify-between">
                     <div className="flex items-center">
-                      <Tag className="h-4 w-4 mr-2 text-muted-foreground" />
+                      <Tag className="mr-2 h-4 w-4 text-muted-foreground" />
                       <span>Health</span>
                     </div>
                     <span className="font-medium">4</span>
@@ -193,4 +193,3 @@ export function StatsView() {
     </div>
   )
 }
-

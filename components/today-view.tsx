@@ -4,7 +4,12 @@ import { useState } from "react"
 import { CheckCircle2, Circle, Flag, MoreHorizontal, Star, Tag } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 import { Badge } from "@/components/ui/badge"
 
 type Task = {
@@ -64,7 +69,9 @@ export function TodayView() {
   const [tasks, setTasks] = useState<Task[]>(TODAY_TASKS)
 
   const toggleTaskCompletion = (taskId: string) => {
-    setTasks(tasks.map((task) => (task.id === taskId ? { ...task, completed: !task.completed } : task)))
+    setTasks(
+      tasks.map((task) => (task.id === taskId ? { ...task, completed: !task.completed } : task))
+    )
   }
 
   const toggleTaskStar = (taskId: string) => {
@@ -107,7 +114,7 @@ export function TodayView() {
 
       <div className="space-y-3">
         {tasks.length === 0 ? (
-          <div className="text-center py-8 text-muted-foreground">No tasks for today</div>
+          <div className="py-8 text-center text-muted-foreground">No tasks for today</div>
         ) : (
           tasks.map((task) => (
             <Card key={task.id} className={task.completed ? "opacity-70" : ""}>
@@ -124,19 +131,32 @@ export function TodayView() {
                     ) : (
                       <Circle className="h-5 w-5" />
                     )}
-                    <span className="sr-only">{task.completed ? "Mark as incomplete" : "Mark as complete"}</span>
+                    <span className="sr-only">
+                      {task.completed ? "Mark as incomplete" : "Mark as complete"}
+                    </span>
                   </Button>
 
-                  <div className="flex-1 min-w-0">
+                  <div className="min-w-0 flex-1">
                     <div className="flex items-start justify-between gap-2">
-                      <h3 className={`font-medium ${task.completed ? "line-through text-muted-foreground" : ""}`}>
+                      <h3
+                        className={`font-medium ${task.completed ? "text-muted-foreground line-through" : ""}`}
+                      >
                         {task.title}
                       </h3>
 
-                      <div className="flex items-center gap-1 shrink-0">
-                        <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => toggleTaskStar(task.id)}>
-                          <Star className={`h-4 w-4 ${task.starred ? "fill-yellow-400 text-yellow-400" : ""}`} />
-                          <span className="sr-only">{task.starred ? "Remove star" : "Star task"}</span>
+                      <div className="flex shrink-0 items-center gap-1">
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-8 w-8"
+                          onClick={() => toggleTaskStar(task.id)}
+                        >
+                          <Star
+                            className={`h-4 w-4 ${task.starred ? "fill-yellow-400 text-yellow-400" : ""}`}
+                          />
+                          <span className="sr-only">
+                            {task.starred ? "Remove star" : "Star task"}
+                          </span>
                         </Button>
 
                         <DropdownMenu>
@@ -153,23 +173,29 @@ export function TodayView() {
                             <DropdownMenuItem onClick={() => toggleTaskStar(task.id)}>
                               {task.starred ? "Remove star" : "Star task"}
                             </DropdownMenuItem>
-                            <DropdownMenuItem onClick={() => deleteTask(task.id)}>Delete</DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => deleteTask(task.id)}>
+                              Delete
+                            </DropdownMenuItem>
                           </DropdownMenuContent>
                         </DropdownMenu>
                       </div>
                     </div>
 
-                    {task.description && <p className="text-sm text-muted-foreground mt-1">{task.description}</p>}
+                    {task.description && (
+                      <p className="mt-1 text-sm text-muted-foreground">{task.description}</p>
+                    )}
 
-                    <div className="flex flex-wrap items-center gap-2 mt-2">
-                      <div className={`flex items-center text-xs ${getPriorityColor(task.priority)}`}>
-                        <Flag className="h-3 w-3 mr-1" />
+                    <div className="mt-2 flex flex-wrap items-center gap-2">
+                      <div
+                        className={`flex items-center text-xs ${getPriorityColor(task.priority)}`}
+                      >
+                        <Flag className="mr-1 h-3 w-3" />
                         {task.priority.charAt(0).toUpperCase() + task.priority.slice(1)}
                       </div>
 
                       {task.tags.map((tag) => (
                         <Badge key={tag} variant="outline" className="text-xs">
-                          <Tag className="h-3 w-3 mr-1" />
+                          <Tag className="mr-1 h-3 w-3" />
                           {tag}
                         </Badge>
                       ))}
@@ -184,4 +210,3 @@ export function TodayView() {
     </div>
   )
 }
-

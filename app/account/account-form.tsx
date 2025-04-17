@@ -1,7 +1,7 @@
-'use client'
-import { useCallback, useEffect, useState } from 'react'
-import { createClient } from '@/utils/supabase/client'
-import { type User } from '@supabase/supabase-js'
+"use client"
+import { useCallback, useEffect, useState } from "react"
+import { createClient } from "@/utils/supabase/client"
+import { type User } from "@supabase/supabase-js"
 
 // ...
 
@@ -18,9 +18,9 @@ export default function AccountForm({ user }: { user: User | null }) {
       setLoading(true)
 
       const { data, error, status } = await supabase
-        .from('profiles')
+        .from("profiles")
         .select(`full_name, username, website, avatar_url`)
-        .eq('id', user?.id)
+        .eq("id", user?.id)
         .single()
 
       if (error && status !== 406) {
@@ -35,7 +35,7 @@ export default function AccountForm({ user }: { user: User | null }) {
         setAvatarUrl(data.avatar_url)
       }
     } catch (error) {
-      alert('Error loading user data!')
+      alert("Error loading user data!")
     } finally {
       setLoading(false)
     }
@@ -58,7 +58,7 @@ export default function AccountForm({ user }: { user: User | null }) {
     try {
       setLoading(true)
 
-      const { error } = await supabase.from('profiles').upsert({
+      const { error } = await supabase.from("profiles").upsert({
         id: user?.id as string,
         full_name: fullname,
         username,
@@ -67,9 +67,9 @@ export default function AccountForm({ user }: { user: User | null }) {
         updated_at: new Date().toISOString(),
       })
       if (error) throw error
-      alert('Profile updated!')
+      alert("Profile updated!")
     } catch (error) {
-      alert('Error updating the data!')
+      alert("Error updating the data!")
     } finally {
       setLoading(false)
     }
@@ -77,7 +77,6 @@ export default function AccountForm({ user }: { user: User | null }) {
 
   return (
     <div className="form-widget">
-
       {/* ... */}
 
       <div>
@@ -89,7 +88,7 @@ export default function AccountForm({ user }: { user: User | null }) {
         <input
           id="fullName"
           type="text"
-          value={fullname || ''}
+          value={fullname || ""}
           onChange={(e) => setFullname(e.target.value)}
         />
       </div>
@@ -98,7 +97,7 @@ export default function AccountForm({ user }: { user: User | null }) {
         <input
           id="username"
           type="text"
-          value={username || ''}
+          value={username || ""}
           onChange={(e) => setUsername(e.target.value)}
         />
       </div>
@@ -107,7 +106,7 @@ export default function AccountForm({ user }: { user: User | null }) {
         <input
           id="website"
           type="url"
-          value={website || ''}
+          value={website || ""}
           onChange={(e) => setWebsite(e.target.value)}
         />
       </div>
@@ -118,7 +117,7 @@ export default function AccountForm({ user }: { user: User | null }) {
           onClick={() => updateProfile({ fullname, username, website, avatar_url })}
           disabled={loading}
         >
-          {loading ? 'Loading ...' : 'Update'}
+          {loading ? "Loading ..." : "Update"}
         </button>
       </div>
 

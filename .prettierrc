@@ -1,10 +1,12 @@
 {
-	"semi": false,
-	"singleQuote": false,
-	"tabWidth": 2,
-	"useTabs": true,
-	"trailingComma": "es5",
-	"printWidth": 100,
-	"bracketSpacing": true,
-	"arrowParens": "always"
+  "semi": false,
+  "singleQuote": false,
+  "tabWidth": 2,
+  "useTabs": false,
+  "trailingComma": "es5",
+  "printWidth": 100,
+  "bracketSpacing": true,
+  "arrowParens": "always",
+  "plugins": ["prettier-plugin-tailwindcss"],
+  "tailwindStylesheet": "./app/globals.css"
 }
