@@ -23,7 +23,7 @@ export function NoteDetail({ note, onBack }: NoteDetailProps) {
     // Replace [[Link]] with styled links
     const processedContent = content.replace(
       /\[\[(.*?)\]\]/g,
-      '<a href="#" class="text-primary underline hover:text-primary/80">$1</a>',
+      '<a href="#" class="text-primary underline hover:text-primary/80">$1</a>'
     )
 
     // Replace # headers with styled headers
@@ -41,15 +41,18 @@ export function NoteDetail({ note, onBack }: NoteDetailProps) {
     const withCheckboxes = withBullets
       .replace(
         /- \[ \] (.*?)$/gm,
-        '<div class="flex items-start gap-2 ml-4"><input type="checkbox" class="mt-1" /><span>$1</span></div>',
+        '<div class="flex items-start gap-2 ml-4"><input type="checkbox" class="mt-1" /><span>$1</span></div>'
       )
       .replace(
         /- \[x\] (.*?)$/gm,
-        '<div class="flex items-start gap-2 ml-4"><input type="checkbox" checked class="mt-1" /><span class="line-through">$1</span></div>',
+        '<div class="flex items-start gap-2 ml-4"><input type="checkbox" checked class="mt-1" /><span class="line-through">$1</span></div>'
       )
 
     // Replace numbered lists
-    const withNumberedLists = withCheckboxes.replace(/^\d+\. (.*?)$/gm, '<li class="ml-4 list-decimal">$1</li>')
+    const withNumberedLists = withCheckboxes.replace(
+      /^\d+\. (.*?)$/gm,
+      '<li class="ml-4 list-decimal">$1</li>'
+    )
 
     // Replace paragraphs
     const withParagraphs = withNumberedLists.replace(/^([^<].*?)$/gm, '<p class="my-2">$1</p>')
@@ -78,7 +81,7 @@ export function NoteDetail({ note, onBack }: NoteDetailProps) {
         </Button>
         <h2 className="text-xl font-semibold">{note.title}</h2>
         <Button variant="outline" size="sm" className="ml-auto">
-          <Edit className="h-4 w-4 mr-1" />
+          <Edit className="mr-1 h-4 w-4" />
           Edit
         </Button>
       </div>
@@ -99,7 +102,7 @@ export function NoteDetail({ note, onBack }: NoteDetailProps) {
         <div className="flex flex-wrap gap-2">
           {note.tags.map((tag) => (
             <Badge key={tag} variant="secondary">
-              <Tag className="h-3 w-3 mr-1" />
+              <Tag className="mr-1 h-3 w-3" />
               {tag}
             </Badge>
           ))}
@@ -108,11 +111,10 @@ export function NoteDetail({ note, onBack }: NoteDetailProps) {
 
       <Card className="p-6">
         <div
-          className="prose max-w-none dark:prose-invert"
+          className="prose dark:prose-invert max-w-none"
           dangerouslySetInnerHTML={{ __html: processContent(note.content) }}
         />
       </Card>
     </div>
   )
 }
-

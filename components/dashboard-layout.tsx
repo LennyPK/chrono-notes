@@ -37,7 +37,12 @@ interface DashboardLayoutProps {
   onNewItem: () => void
 }
 
-export function DashboardLayout({ children, currentView, onViewChange, onNewItem }: DashboardLayoutProps) {
+export function DashboardLayout({
+  children,
+  currentView,
+  onViewChange,
+  onNewItem,
+}: DashboardLayoutProps) {
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false)
 
   const navItems = [
@@ -81,8 +86,8 @@ export function DashboardLayout({ children, currentView, onViewChange, onNewItem
   }
 
   const SidebarContent = () => (
-    <div className="flex flex-col h-full">
-      <div className="p-4 border-b">
+    <div className="flex h-full flex-col">
+      <div className="border-b p-4">
         <div className="flex items-center gap-2">
           <CheckCircle className="h-6 w-6 text-primary" />
           <h1 className="text-xl font-bold">ChronoNotes</h1>
@@ -108,11 +113,11 @@ export function DashboardLayout({ children, currentView, onViewChange, onNewItem
         </nav>
       </div>
 
-      <div className="p-4 border-t">
+      <div className="border-t p-4">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="w-full justify-start">
-              <Avatar className="h-6 w-6 mr-2">
+              <Avatar className="mr-2 h-6 w-6">
                 <AvatarImage src="/placeholder.svg?height=32&width=32" alt="User" />
                 <AvatarFallback>JD</AvatarFallback>
               </Avatar>
@@ -144,22 +149,27 @@ export function DashboardLayout({ children, currentView, onViewChange, onNewItem
   return (
     <div className="flex h-screen bg-background">
       {/* Desktop Sidebar */}
-      <div className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0 border-r">
+      <div className="hidden border-r md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col">
         <SidebarContent />
       </div>
 
       {/* Mobile Sidebar */}
       <Sheet open={isMobileSidebarOpen} onOpenChange={setIsMobileSidebarOpen}>
-        <SheetContent side="left" className="p-0 w-64">
+        <SheetContent side="left" className="w-64 p-0">
           <SidebarContent />
         </SheetContent>
       </Sheet>
 
       {/* Main Content */}
-      <div className="md:ml-64 flex-1 flex flex-col">
-        <header className="bg-background border-b">
+      <div className="flex flex-1 flex-col md:ml-64">
+        <header className="border-b bg-background">
           <div className="flex h-16 items-center px-4">
-            <Button variant="ghost" size="icon" className="md:hidden mr-2" onClick={() => setIsMobileSidebarOpen(true)}>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="mr-2 md:hidden"
+              onClick={() => setIsMobileSidebarOpen(true)}
+            >
               <Menu className="h-6 w-6" />
               <span className="sr-only">Open sidebar</span>
             </Button>
@@ -175,7 +185,7 @@ export function DashboardLayout({ children, currentView, onViewChange, onNewItem
             </div>
 
             <Button onClick={onNewItem} size="sm" className="ml-auto">
-              <Plus className="h-4 w-4 mr-1" />
+              <Plus className="mr-1 h-4 w-4" />
               {getButtonLabel()}
             </Button>
           </div>
@@ -186,4 +196,3 @@ export function DashboardLayout({ children, currentView, onViewChange, onNewItem
     </div>
   )
 }
-

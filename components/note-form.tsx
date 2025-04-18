@@ -7,8 +7,20 @@ import { File, Tag, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 import { Badge } from "@/components/ui/badge"
 
 interface NoteFormProps {
@@ -95,7 +107,7 @@ export function NoteForm({ onClose }: NoteFormProps) {
             <div className="space-y-2">
               <div className="flex gap-2">
                 <div className="relative flex-1">
-                  <Tag className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
+                  <Tag className="absolute top-2.5 left-2 h-4 w-4 text-muted-foreground" />
                   <Input
                     placeholder="Add tags"
                     value={tagInput}
@@ -117,7 +129,7 @@ export function NoteForm({ onClose }: NoteFormProps) {
           </div>
 
           {tags.length > 0 && (
-            <div className="flex flex-wrap gap-2 mt-2">
+            <div className="mt-2 flex flex-wrap gap-2">
               {tags.map((tag) => (
                 <Badge key={tag} variant="secondary" className="flex items-center gap-1">
                   {tag}
@@ -149,4 +161,3 @@ export function NoteForm({ onClose }: NoteFormProps) {
     </Dialog>
   )
 }
-

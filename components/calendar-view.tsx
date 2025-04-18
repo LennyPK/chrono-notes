@@ -114,7 +114,7 @@ export function CalendarView() {
         <CardContent className="p-0">
           <div className="grid grid-cols-7 border-b">
             {dayNames.map((day) => (
-              <div key={day} className="p-2 text-center font-medium text-sm">
+              <div key={day} className="p-2 text-center text-sm font-medium">
                 {day}
               </div>
             ))}
@@ -124,20 +124,27 @@ export function CalendarView() {
             {calendarDays.map((day, index) => (
               <div
                 key={index}
-                className={`min-h-[100px] p-2 border-b border-r ${day === null ? "bg-muted/30" : ""} ${
-                  day === new Date().getDate() && month === new Date().getMonth() && year === new Date().getFullYear()
+                className={`min-h-[100px] border-r border-b p-2 ${day === null ? "bg-muted/30" : ""} ${
+                  day === new Date().getDate() &&
+                  month === new Date().getMonth() &&
+                  year === new Date().getFullYear()
                     ? "bg-muted/50"
                     : ""
                 }`}
               >
                 {day !== null && (
                   <>
-                    <div className="text-sm font-medium mb-1">{day}</div>
+                    <div className="mb-1 text-sm font-medium">{day}</div>
                     <div className="space-y-1">
                       {getEventsForDay(day).map((event) => (
-                        <div key={event.id} className="text-xs p-1 rounded truncate bg-background border">
+                        <div
+                          key={event.id}
+                          className="truncate rounded border bg-background p-1 text-xs"
+                        >
                           <div className="flex items-center gap-1">
-                            <div className={`w-2 h-2 rounded-full ${getPriorityColor(event.priority)}`} />
+                            <div
+                              className={`h-2 w-2 rounded-full ${getPriorityColor(event.priority)}`}
+                            />
                             {event.title}
                           </div>
                         </div>
@@ -153,4 +160,3 @@ export function CalendarView() {
     </div>
   )
 }
-

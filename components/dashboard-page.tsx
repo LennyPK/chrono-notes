@@ -26,7 +26,11 @@ export function DashboardPage() {
   }
 
   return (
-    <DashboardLayout currentView={currentView} onViewChange={setCurrentView} onNewItem={handleNewItem}>
+    <DashboardLayout
+      currentView={currentView}
+      onViewChange={setCurrentView}
+      onNewItem={handleNewItem}
+    >
       {currentView === "tasks" && <TaskList />}
       {currentView === "today" && <TodayView />}
       {currentView === "calendar" && <CalendarView />}
@@ -39,4 +43,3 @@ export function DashboardPage() {
     </DashboardLayout>
   )
 }
-

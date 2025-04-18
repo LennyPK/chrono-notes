@@ -1,0 +1,14 @@
+node_modules
+.next
+.prettierignore
+.stylelintignore
+.eslintignore
+*.log
+docs
+public
+package-lock.json
+.gitignore
+pnpm-lock.yaml
+README.md
+CHANGELOG.md
+next-env.d.ts
