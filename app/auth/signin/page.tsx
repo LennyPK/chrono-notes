@@ -7,12 +7,12 @@ import { useState } from "react"
 
 import { Button } from "@/components/ui/button"
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
+	Card,
+	CardContent,
+	CardDescription,
+	CardFooter,
+	CardHeader,
+	CardTitle,
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -43,10 +43,10 @@ export default function SignInPage() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-muted/40 p-4">
-      <Link href="/" className="absolute top-8 left-8 flex items-center gap-2 md:top-12 md:left-12">
-        <CheckCircle className="h-6 w-6 text-primary" />
-        <span className="text-xl font-bold">ChronoNotes</span>
+    <div className="flex mx-auto min-h-screen flex-col items-center justify-center bg-muted/40 p-4">
+      <Link href="/" className="mb-8 flex flex-col items-center gap-2">
+        <CheckCircle className="h-20 w-20 text-primary" />
+        <span className="text-4xl font-bold">ChronoNotes</span>
       </Link>
 
       <Card className="w-full max-w-md">
