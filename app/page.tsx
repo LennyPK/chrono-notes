@@ -1,6 +1,6 @@
-import { CheckCircle, CheckCircle2, Star } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
+import { CheckCircle, CheckCircle2, Star } from "lucide-react"
+import Image from "next/image"
+import Link from "next/link"
 
 export default function LandingPage() {
   return (
@@ -36,14 +36,11 @@ export default function LandingPage() {
             </Link>
           </nav>
           <div className="flex items-center gap-4">
-            <Link
-              href="/auth/signin"
-              className="text-sm font-medium underline-offset-4 hover:underline"
-            >
+            <Link href="/signin" className="text-sm font-medium underline-offset-4 hover:underline">
               Sign In
             </Link>
             <Link
-              href="/auth/signup"
+              href="/signup"
               className="inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:ring-1 focus-visible:outline-none"
             >
               Get Started
@@ -63,13 +60,13 @@ export default function LandingPage() {
                     Organize your work and life, finally.
                   </h1>
                   <p className="max-w-[600px] text-muted-foreground md:text-xl">
-                    Become focused, organized, and calm with ChronoNotes. The world's #1 task
+                    Become focused, organized, and calm with ChronoNotes. The world&apos;s #1 task
                     manager and note-taking app.
                   </p>
                 </div>
                 <div className="flex flex-col gap-2 min-[400px]:flex-row">
                   <Link
-                    href="/auth/signup"
+                    href="/signup"
                     className="inline-flex h-10 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:ring-1 focus-visible:outline-none"
                   >
                     Get Started for Free

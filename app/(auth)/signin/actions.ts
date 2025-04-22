@@ -3,6 +3,7 @@
 import { redirect } from "next/navigation"
 
 import { createClient } from "@/utils/supabase/server"
+import { revalidatePath } from "next/cache"
 
 export async function signin(formData: FormData) {
   const supabase = await createClient()
@@ -22,5 +23,6 @@ export async function signin(formData: FormData) {
   }
 
   // If successful, redirect to dashboard
+  revalidatePath("/dashboard")
   redirect("/dashboard")
 }
