@@ -59,7 +59,11 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter />
+      <SidebarFooter>
+        <SidebarMenuButton asChild>
+          <a href="/signout">Logout</a>
+        </SidebarMenuButton>
+      </SidebarFooter>
     </Sidebar>
   )
 }
