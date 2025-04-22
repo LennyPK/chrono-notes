@@ -2,7 +2,6 @@
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Sidebar } from "@/components/ui/sidebar"
 import { Loader2 } from "lucide-react"
 import { useEffect, useState } from "react"
 import { createTask, getTodos } from "./actions"
@@ -53,7 +52,6 @@ export default function Dashboard() {
 
   return (
     <div className="mx-auto flex min-h-screen flex-col items-center justify-center bg-muted/40 p-4">
-      <Sidebar></Sidebar>
       <h1>Dashboard</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         {error && (
