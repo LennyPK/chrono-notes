@@ -1,4 +1,4 @@
-import { Calendar, LayoutDashboard, List, StickyNote, Sun } from "lucide-react"
+import { Calendar, CheckCircle, LogOut, NotebookPen, Search, Sun } from "lucide-react"
 import {
   Sidebar,
   SidebarContent,
@@ -12,9 +12,9 @@ import {
 
 const items = [
   {
-    title: "All Tasks",
-    url: "#",
-    icon: List,
+    title: "Tasks",
+    url: "/dashboard",
+    icon: CheckCircle,
   },
   {
     title: "Today",
@@ -29,18 +29,18 @@ const items = [
   {
     title: "Notes",
     url: "#",
-    icon: StickyNote,
+    icon: NotebookPen,
   },
   {
-    title: "Stats",
+    title: "Search",
     url: "#",
-    icon: LayoutDashboard,
+    icon: Search,
   },
 ]
 
 export function AppSidebar() {
   return (
-    <Sidebar>
+    <Sidebar collapsible="icon">
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupContent>
@@ -61,7 +61,9 @@ export function AppSidebar() {
       </SidebarContent>
       <SidebarFooter>
         <SidebarMenuButton asChild>
-          <a href="/signout">Logout</a>
+          <a href="/signout">
+            <LogOut /> <span>Logout</span>
+          </a>
         </SidebarMenuButton>
       </SidebarFooter>
     </Sidebar>

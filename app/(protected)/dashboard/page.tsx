@@ -1,8 +1,9 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Loader2 } from "lucide-react"
+import { TaskDetail } from "@/components/tasks/task-detail"
+import { TaskFolders } from "@/components/tasks/task-folders"
+import { TaskList } from "@/components/tasks/task-list"
+import { Task } from "@/lib/types"
 import { useEffect, useState } from "react"
 import { createTask, getTodos } from "./actions"
 
@@ -11,6 +12,10 @@ export default function Dashboard() {
   const [error, setError] = useState("")
   const [todos, setTodos] = useState<any[]>([])
   const [todosError, setTodosError] = useState("")
+
+  const [selectedTask, setSelectedTask] = useState<Task | null>(null)
+  const [selectedList, setSelectedList] = useState("all")
+  const [tasks, setTasks] = useState<Task[]>([])
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -33,7 +38,7 @@ export default function Dashboard() {
       if (todosError) {
         setTodosError(todosError.message)
       } else {
-        setTodos(data || [])
+        setTasks(data || [])
       }
     }
   }
@@ -50,84 +55,78 @@ export default function Dashboard() {
     loadTodos()
   }, [])
 
+  const handleTaskSelect = (task: Task) => {
+    setSelectedTask(task)
+  }
+
+  const handleListSelect = (list: string) => {
+    setSelectedList(list)
+    setSelectedTask(null)
+  }
+
+  const handleTaskUpdate = (updatedTask: Task) => {
+    setTasks(tasks.map((task) => (task.id === updatedTask.id ? updatedTask : task)))
+    setSelectedTask(updatedTask)
+  }
+
+  const handleTaskToggle = (taskId: string) => {
+    setTasks(
+      tasks.map((task) => (task.id === taskId ? { ...task, completed: !task.completed } : task))
+    )
+
+    if (selectedTask && selectedTask.id === taskId) {
+      setSelectedTask({
+        ...selectedTask,
+        completed: !selectedTask.completed,
+      })
+    }
+  }
+
+  const handleTaskAdd = () => {
+    const newTask: Task = {
+      id: crypto.randomUUID(),
+      title: "New task",
+      description: "",
+      dueDate: null,
+      priority: "medium",
+      listID: selectedList,
+      tags: [],
+      completed: false,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    }
+
+    setTasks([newTask, ...tasks])
+    setSelectedTask(newTask)
+  }
+
+  const handleTaskDelete = (taskId: string) => {
+    setTasks(tasks.filter((task) => task.id !== taskId))
+    if (selectedTask && selectedTask.id === taskId) {
+      setSelectedTask(null)
+    }
+  }
+
+  const filteredTasks = tasks.filter((task) => task.listID === selectedList)
+
   return (
-    <div className="mx-auto flex min-h-screen flex-col items-center justify-center bg-muted/40 p-4">
-      <h1>Dashboard</h1>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        {error && (
-          <div className="rounded-md bg-destructive/15 px-4 py-3 text-sm text-destructive">
-            {error}
-          </div>
-        )}
-        <Input
-          id="title"
-          name="title"
-          type="text"
-          placeholder="New Task"
-          required
-          onChange={() => setError("")}
+    <div className="flex h-screen w-screen bg-background">
+      <TaskFolders selectedList={selectedList} onListSelect={handleListSelect} />
+      <TaskList
+        tasks={filteredTasks}
+        selectedTaskID={selectedTask?.id}
+        onTaskSelect={handleTaskSelect}
+        onTaskToggle={handleTaskToggle}
+        onTaskAdd={handleTaskAdd}
+        listName={selectedList}
+      />
+      {selectedTask && (
+        <TaskDetail
+          task={selectedTask}
+          onTaskUpdate={handleTaskUpdate}
+          onTaskDelete={handleTaskDelete}
         />
-        <Input
-          id="description"
-          name="description"
-          type="text"
-          placeholder="Description"
-          onChange={() => setError("")}
-        />
-        <Button type="submit" className="w-full" disabled={isLoading}>
-          {isLoading ? (
-            <>
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Adding Task...
-            </>
-          ) : (
-            "Create Task"
-          )}
-        </Button>
-      </form>
-      <div className="mt-4">
-        <div className="w-full max-w-md space-y-4">
-          <h2 className="text-xl font-semibold">Your Tasks</h2>
-          <div className="rounded-lg border bg-card">
-            {todos?.length === 0 ? (
-              <div className="p-4 text-center text-muted-foreground">
-                No tasks yet. Create one above!
-              </div>
-            ) : (
-              <div className="divide-y">
-                {todos?.map((todo) => (
-                  <div key={todo.id} className="flex items-center justify-between p-4">
-                    <div>
-                      <h3 className="font-medium">{todo.title}</h3>
-                      {todo.description && (
-                        <p className="text-sm text-muted-foreground">{todo.description}</p>
-                      )}
-                    </div>
-                    <div className="flex items-center gap-2">
-                      {/* <Button
-												variant="ghost"
-												size="sm"
-												onClick={() => toggleTodo(todo.id)}
-												className={todo.completed ? "text-primary" : ""}
-											>
-												{todo.completed ? "Completed" : "Mark Complete"}
-											</Button>
-											<Button
-												variant="ghost"
-												size="sm"
-												className="text-destructive"
-												onClick={() => deleteTodo(todo.id)}
-											>
-												Delete
-											</Button> */}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
+      )}
     </div>
   )
 }

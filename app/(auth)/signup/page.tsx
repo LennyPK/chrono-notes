@@ -49,10 +49,10 @@ export default function SignUpPage() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-muted/40 p-4">
-      <Link href="/" className="absolute top-8 left-8 flex items-center gap-2 md:top-12 md:left-12">
-        <CheckCircle className="h-6 w-6 text-primary" />
-        <span className="text-xl font-bold">ChronoNotes</span>
+    <div className="justify-top mx-auto flex min-h-screen flex-col items-center bg-muted/40 p-4">
+      <Link href="/" className="mb-8 flex flex-col items-center gap-2">
+        <CheckCircle className="h-10 w-10 text-primary" />
+        <span className="text-3xl font-bold">ChronoNotes</span>
       </Link>
 
       <Card className="w-full max-w-md">
@@ -126,7 +126,7 @@ export default function SignUpPage() {
           <div className="text-center text-sm text-muted-foreground">
             Already have an account?{" "}
             <Link
-              href="/auth/signin"
+              href="/signin"
               className="font-medium text-primary underline-offset-4 hover:underline"
             >
               Sign in
