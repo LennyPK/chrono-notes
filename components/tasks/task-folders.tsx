@@ -15,6 +15,7 @@ import {
   Tag,
 } from "lucide-react"
 import { Button } from "../ui/button"
+import { ResizablePanel } from "../ui/resizable"
 
 interface TaskFolderProps {
   selectedList: string
@@ -38,14 +39,19 @@ export function TaskFolders({ selectedList, onListSelect }: TaskFolderProps) {
   ]
 
   const customLists = [
-    // subject to change
+    // change this to dynamic
     { id: "personal", name: "Personal", icon: <Folder className="h-4 w-4" /> },
     { id: "work", name: "Work", icon: <Folder className="h-4 w-4" /> },
     { id: "shopping", name: "Shopping", icon: <Folder className="h-4 w-4" /> },
   ]
 
   return (
-    <div className="flex h-full w-64 flex-col border-r bg-muted/10">
+    <ResizablePanel
+      defaultSize={20}
+      minSize={10}
+      maxSize={25}
+      className="flex h-full w-64 flex-col border-r bg-muted/10"
+    >
       <div className="flex-1 overflow-auto py-2">
         {/* Main Lists */}
         <div className="px-3 py-2">
@@ -114,6 +120,6 @@ export function TaskFolders({ selectedList, onListSelect }: TaskFolderProps) {
           </div>
         </div>
       </div>
-    </div>
+    </ResizablePanel>
   )
 }

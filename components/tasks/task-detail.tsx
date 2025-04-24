@@ -5,6 +5,7 @@ import { CalendarIcon, Clock, Tag, Trash2, X } from "lucide-react"
 import { useState } from "react"
 import { Button } from "../ui/button"
 import { Input } from "../ui/input"
+import { ResizablePanel } from "../ui/resizable"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select"
 import { Textarea } from "../ui/textarea"
 
@@ -45,7 +46,7 @@ export function TaskDetail({ task, onTaskUpdate, onTaskDelete }: TaskDetailProps
   }
 
   return (
-    <div className="flex h-full flex-1 flex-col border-l pr-20">
+    <ResizablePanel minSize={15} className="flex h-full flex-1 flex-col pr-20">
       <div className="flex items-center justify-between border-b p-4">
         <h3 className="font-medium">Task Details</h3>
         <Button variant="ghost" size="icon" onClick={() => onTaskDelete(task.id)}>
@@ -159,6 +160,6 @@ export function TaskDetail({ task, onTaskUpdate, onTaskDelete }: TaskDetailProps
           />
         </div>
       </div>
-    </div>
+    </ResizablePanel>
   )
 }

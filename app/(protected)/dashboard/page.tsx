@@ -3,6 +3,7 @@
 import { TaskDetail } from "@/components/tasks/task-detail"
 import { TaskFolders } from "@/components/tasks/task-folders"
 import { TaskList } from "@/components/tasks/task-list"
+import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable"
 import { Task } from "@/lib/types"
 import { useEffect, useState } from "react"
 import { createTask, getTodos } from "./actions"
@@ -110,8 +111,12 @@ export default function Dashboard() {
   const filteredTasks = tasks.filter((task) => task.listID === selectedList)
 
   return (
-    <div className="flex h-screen w-screen bg-background">
+    <ResizablePanelGroup
+      direction="horizontal"
+      className="max-w-md rounded-lg border md:min-w-screen"
+    >
       <TaskFolders selectedList={selectedList} onListSelect={handleListSelect} />
+      <ResizableHandle />
       <TaskList
         tasks={filteredTasks}
         selectedTaskID={selectedTask?.id}
@@ -120,13 +125,21 @@ export default function Dashboard() {
         onTaskAdd={handleTaskAdd}
         listName={selectedList}
       />
-      {selectedTask && (
+      <ResizableHandle />
+      {selectedTask ? (
         <TaskDetail
           task={selectedTask}
           onTaskUpdate={handleTaskUpdate}
           onTaskDelete={handleTaskDelete}
         />
+      ) : (
+        <ResizablePanel
+          minSize={15}
+          className="flex h-full flex-1 flex-col items-center justify-center border-l pr-20"
+        >
+          <span className="text-muted-foreground">No Task Selected</span>
+        </ResizablePanel>
       )}
-    </div>
+    </ResizablePanelGroup>
   )
 }

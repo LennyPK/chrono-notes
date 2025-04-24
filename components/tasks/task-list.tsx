@@ -6,6 +6,7 @@ import { Check, Plus } from "lucide-react"
 import { useState } from "react"
 import { Button } from "../ui/button"
 import { Input } from "../ui/input"
+import { ResizablePanel } from "../ui/resizable"
 
 interface TaskListProps {
   tasks: Task[]
@@ -35,7 +36,7 @@ export function TaskList({
   }
 
   return (
-    <div className="flex h-full w-80 flex-col border-r">
+    <ResizablePanel defaultSize={30} minSize={20} className="flex h-full w-80 flex-col">
       {/* Task List Header */}
       <div className="flex items-center justify-between p-4">
         <h2 className="text-xl font-semibold">{formatListName(listName)}</h2>
@@ -103,6 +104,6 @@ export function TaskList({
           ))}
         </div>
       </div>
-    </div>
+    </ResizablePanel>
   )
 }
